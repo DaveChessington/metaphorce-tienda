@@ -2,6 +2,8 @@ package com.metaphorce.tienda.entidades;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "pedidos")
 public class Pedido {
@@ -14,6 +16,8 @@ public class Pedido {
     private Cliente cliente;
     /*@Column(name = "cliente_id")
     private int clienteId;*/
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<DetallePedido> detalles; //se encargará de que el pedido guarde sus detalles pedidos
 
     public int getPedidoId() {
         return pedidoId;
@@ -29,5 +33,13 @@ public class Pedido {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public List<DetallePedido> getDetalles() {
+        return detalles;
+    }
+
+    public void setDetalles(List<DetallePedido> detalles) {
+        this.detalles = detalles;
     }
 }
