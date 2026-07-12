@@ -26,4 +26,16 @@ public class ControllerAdviceGlobal {
     public ResponseEntity<?> manejarClienteNoEncontrado(ClientNotFoundException exception){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }
+
+    @ExceptionHandler(PedidoNotFoundException.class)
+    public ResponseEntity<?> manejarPedidoNoEncontrado(PedidoNotFoundException exception){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
+    }
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    public  ResponseEntity<?> manejarPedidoNoEncontrado(ProductNotFoundException exception){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
+    }
+
+
 }

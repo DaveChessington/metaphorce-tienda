@@ -17,6 +17,9 @@ public class ProductoServicesImp implements IProductoServices {
         this.productoRepository = productoRepository;
     }
 
+    public ProductoServicesImp() {
+    }
+
     @Override
     public List<Producto> listarProductos() {
         return productoRepository.findAll();

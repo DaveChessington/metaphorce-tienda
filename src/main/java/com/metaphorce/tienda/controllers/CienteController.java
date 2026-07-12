@@ -27,17 +27,20 @@ public class CienteController {
     }
 
     @GetMapping("/clientes")
-    public List<Cliente> obtenerListaClientes(){
-        return clienteServices.listarClentes();
+    public ResponseEntity<?> obtenerListaClientes(){
+        return ResponseEntity.status(HttpStatus.OK).body(clienteServices.listarClentes());
     }
 
+    @GetMapping("/cliente/{id}")
+    public ResponseEntity<?> obtenerCliente(@PathVariable int id){
+        return ResponseEntity.status(HttpStatus.OK).body(clienteServices.obetenerCliente(id));
+    }
     /*
     @PostMapping("/cliente")
     public Cliente insertarCliente(@RequestBody Cliente cliente){ //el cliente vendrá definido en el cuerpo de la petición
         return clienteServices.insertarCliente(cliente);
-    }*/
+    }
 
-    /*
     @PostMapping("/cliente")
     public ResponseEntity<?> insertarCliente(@RequestBody @Valid Cliente cliente, BindingResult bindResult){ //el cliente vendrá definido en el cuerpo de la petición
         Map<String,String> errores=new HashMap<>();
@@ -53,17 +56,17 @@ public class CienteController {
 
     @PostMapping("/cliente")
     public ResponseEntity<?> insertarCliente(@RequestBody @Valid Cliente cliente){ //el cliente vendrá definido en el cuerpo de la petición
-        Cliente clienteCreado=clienteServices.insertarCliente(cliente);
-        return ResponseEntity.status(HttpStatus.CREATED).body(clienteCreado);
+        return ResponseEntity.status(HttpStatus.CREATED).body(clienteServices.insertarCliente(cliente));
     }
 
     @PutMapping("/cliente/{id}")
-    public Cliente actualizarCliente(@PathVariable int id,@RequestBody Cliente cliente){
-        return clienteServices.actualizarCliente(id,cliente);
+    public ResponseEntity<?> actualizarCliente(@PathVariable @Valid int id,@RequestBody Cliente cliente){
+        return ResponseEntity.status(HttpStatus.OK).body(clienteServices.actualizarCliente(id,cliente));
     }
 
     @DeleteMapping("/cliente/{id}")
-    public void eliminarCliente(@PathVariable int id){
+    public ResponseEntity<?> eliminarCliente(@PathVariable @Valid int id){
         clienteServices.eliminarCliente(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
