@@ -1,8 +1,10 @@
 package com.metaphorce.tienda.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;
-
+@Entity
+@Table(name="detalle_pedido")
 public class DetallePedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +17,7 @@ public class DetallePedido {
     private int productoId;*/
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pedido_id",referencedColumnName = "pedido_id")
+    @JsonIgnoreProperties("detalle")// tell jackson to ignore property to avoid recursiveness
     private Pedido pedido;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "producto_id", referencedColumnName = "producto_id")

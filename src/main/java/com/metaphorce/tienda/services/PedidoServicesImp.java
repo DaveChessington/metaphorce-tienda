@@ -1,6 +1,7 @@
 package com.metaphorce.tienda.services;
 
 import com.metaphorce.tienda.Exceptions.ProductNotFoundException;
+import com.metaphorce.tienda.entidades.DetallePedido;
 import com.metaphorce.tienda.entidades.Pedido;
 import com.metaphorce.tienda.repositories.PedidoRepository;
 import jakarta.transaction.Transactional;
@@ -36,7 +37,9 @@ public class PedidoServicesImp implements IPedidoServices{
     @Transactional // Asegura que se guarde el pedido y todos sus detalles juntos
     public Pedido insertarPedido(Pedido pedido) {
         if (pedido.getDetalles() != null) {
-            pedido.getDetalles().forEach(detalle -> detalle.setPedido(pedido));
+            for (DetallePedido detalle : pedido.getDetalles()) {
+                detalle.setPedido(pedido);
+            }
         }
         return pedidoRepository.save(pedido);
     }

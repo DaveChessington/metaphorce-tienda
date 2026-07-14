@@ -11,9 +11,9 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //la pk sera manejada por la bd
     @Column(name = "cliente_id")
     private int clienteId;
-    @NotBlank(message = "El nombre no puede ser vacio")
-    private String nombre;
-    @Size(min = 3,max = 50,message = "la ciudad debe tener de 3 a 50 caracteres")
+    //@NotBlank(message = "El nombre no puede ser vacio")
+    private String nombre; //commented out to avoid problems when trying to insert new pedido 
+    //@Size(min = 3,max = 50,message = "la ciudad debe tener de 3 a 50 caracteres")
     private String ciudad;
 
     public int getClienteId() {
